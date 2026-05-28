@@ -1,0 +1,7 @@
+{
+  "id": "song_mastery",
+  "name": "Per-Song Mastery",
+  "version": "1.0.0",
+  "private": false,
+  "script": "screen.js"
+}
