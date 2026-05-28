@@ -7,6 +7,9 @@
     // filename, and restores it automatically when that song loads.
     // Songs that have never been explicitly set start at 100%.
 
+    if (window.__songMasteryPluginLoaded) return;
+    window.__songMasteryPluginLoaded = true;
+
     const STORAGE_KEY = 'slopsmith-song-mastery';
 
     function getFilename() {
@@ -35,6 +38,9 @@
         } catch (_) {}
     }
 
+    // Deliberately bypasses window.setMastery to avoid triggering the
+    // debounced server POST that updates the global master_difficulty —
+    // restoring a saved value on song load should not count as a user change.
     function applyMastery(pct) {
         const slider = document.getElementById('mastery-slider');
         const label = document.getElementById('mastery-label');
@@ -47,14 +53,15 @@
     }
 
     // Wrap window.setMastery to save per-song whenever the slider moves.
+    // Read the committed slider value after calling the original so we save
+    // exactly what core applied (its clamp/round) rather than re-deriving it.
     const _originalSetMastery = window.setMastery;
     if (typeof _originalSetMastery === 'function') {
         window.setMastery = function (v) {
-            _originalSetMastery.call(this, v);
-            const parsed = parseInt(v, 10);
-            if (Number.isFinite(parsed)) {
-                save(getFilename(), Math.max(0, Math.min(100, parsed)));
-            }
+            _originalSetMastery(v);
+            const slider = document.getElementById('mastery-slider');
+            const committed = slider ? parseInt(slider.value, 10) : NaN;
+            if (Number.isFinite(committed)) save(getFilename(), committed);
         };
     }
 
