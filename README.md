@@ -20,7 +20,7 @@ A [Slopsmith](https://github.com/byrongamatos/slopsmith) plugin that remembers t
 
 ```bash
 cd /path/to/slopsmith/plugins
-git clone https://github.com/your-username/slopsmith-plugin-song-mastery.git song_mastery
+git clone https://github.com/jamesgaiser/slopsmith-plugin-song-mastery.git song_mastery
 docker compose restart
 ```
 
@@ -36,7 +36,7 @@ Clone or copy the plugin folder into the Desktop app's user plugins directory (v
 
 ```bash
 # macOS / Linux
-git clone https://github.com/your-username/slopsmith-plugin-song-mastery.git \
+git clone https://github.com/jamesgaiser/slopsmith-plugin-song-mastery.git \
   ~/.config/slopsmith-desktop/plugins/song_mastery
 ```
 
