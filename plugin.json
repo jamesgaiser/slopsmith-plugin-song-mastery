@@ -1,7 +1,7 @@
 {
   "id": "song_mastery",
   "name": "Per-Song Mastery",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": false,
   "script": "screen.js"
 }
