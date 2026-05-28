@@ -69,7 +69,10 @@
     // enabled, i.e. the source has a multi-level phrase ladder).
     if (window.slopsmith) {
         window.slopsmith.on('song:ready', function (e) {
-            if (!e.detail?.hasPhraseData) return;
+            if (!e.detail?.hasPhraseData) {
+                applyMastery(100);
+                return;
+            }
             const filename = getFilename();
             const saved = load(filename);
             applyMastery(saved !== null ? saved : 100);
